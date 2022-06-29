@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto Mono' rel='stylesheet'>
+    </head>
+    <body>
+        <h1>palindromes</h1>
+        <div class = "row">
+            <div class = "col" id="col1" >
+                <h4>nr.</h4>
+                <p class = 'rowel nr' name ="num" id="s1" >1</p>
+                <p class = 'rowel nr' name ="num" id="s2" >2</p>
+                <p class = 'rowel nr' name ="num" id="s3" >3</p>
+                <p class = 'rowel nr' name ="num" id="s4" >4</p>
+            </div>
+            <div class = "col" id="col2">
+                <h4>input word</h4>
+                <p class = 'rowel word' id="word1">anna</p>
+                <p class = 'rowel word' id="word2">Anna</p>
+                <p class = 'rowel word' id="word3">anna </p>
+                <p class = 'rowel word' id="word4">YellowSubmarine</p>
+            </div>
+            <div class = "col" id="col3" >
+                <h4>expected result === actual result</h4>
+                <p class = 'rowel value' id="value1">true</p>
+                <p class = 'rowel value' id="value2">true</p>
+                <p class = 'rowel value' id="value3">true</p>
+                <p class = 'rowel value' id="value4">false</p>
+            </div>
+        </div>
+        <form>
+            <label>Enter your word and whether you expect it to be a palindrome<br/>
+                <input type="text" id="word" value="word, false" />
+            </label>    
+          </form>
+        <div id="bdiv">
+        <button id="button" onClick="myinterface()">test my word</button>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        <script >
+            function myinterface(){
+                let pieces = document.getElementById("word").value.split(', ');
+                addElements(pieces[0], pieces[1]);
+            }
+
+            function isPalindrome (word) {
+                return word.toLowerCase().trim() === word.toLowerCase().trim().split("").reverse().join("");
+            }
+            
+            function addElements(word,value){
+
+                let arr = document.getElementsByName("num");
+                let index = parseInt((arr[arr.length-1].innerHTML)) + 1;
+
+                const tag = document.createElement("p");
+                const tag2 = document.createElement("p");
+                const tag3 = document.createElement("p");
+
+
+                const newNr = document.createTextNode(index);
+                const newWord = document.createTextNode(word);
+                const newValue = document.createTextNode(value);
+                
+                tag.appendChild(newNr);
+                tag2.appendChild(newWord);
+                tag3.appendChild(newValue);
+
+                tag.classList.add("rowel");
+                tag2.classList.add("rowel");
+                tag3.classList.add("rowel");
+
+                
+                tag.classList.add("nr");
+                tag2.classList.add("word");
+                tag3.classList.add("value");
+
+                tag.setAttribute("name","num");
+
+                tag.id = "s" + index;
+                tag2.id = "word" + index;
+                tag3.id = "value" + index;
+
+
+
+                if(!(isPalindrome(word).toString() === value)){
+                    tag3.style.background = '#F71735';
+                }
+                document.getElementById("col1").appendChild(tag);
+                document.getElementById("col2").appendChild(tag2); 
+                document.getElementById("col3").appendChild(tag3); 
+
+            }
+            </script>
+    </body>
+</html>
